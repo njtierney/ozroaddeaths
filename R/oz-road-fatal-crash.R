@@ -1,3 +1,36 @@
+
+if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
+globalVariables(
+  c("crashid",
+    "dayweek",
+    "number_of_fatalities",
+    "bus_involvement",
+    "heavy_rigid_truck_involvement",
+    "articulated_truck",
+    "articulated_truck_involvement",
+    "bus",
+    "bus_involvement",
+    "crash_id",
+    "crash_type",
+    "date_time",
+    "day",
+    "dayweek",
+    "gender",
+    "heavy_rigid_truck",
+    "hour",
+    "minute",
+    "month",
+    "road_user",
+    "speed_limit",
+    "time",
+    "weekday",
+    "year",
+    "state",
+    "age"
+  )
+)
+
+
 #' Get the australian fatal crash data
 #'
 #' The Australian Road Deaths Database provides basic details of road transport
@@ -26,12 +59,11 @@
 #'   \item{`articualated_truck`}{logical - whether a articulated trucl was involved in the crash (TRUE) or not (FALSE)}
 #'   \item{`speed_limit`}{Integer, posted speed limit at the location of crash}}
 #' @source \url{https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx}
-#' @export
-
 #' @examples
 #' \dontrun{
 #' oz_fatal_crash()
 #' }
+#' @export
 oz_road_fatal_crash <- function(){
 
   suppressMessages(suppressWarnings(
