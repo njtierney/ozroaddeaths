@@ -1,0 +1,11 @@
+Package: ozcrash
+Title: Pulls Data From Australian Road Deaths Database
+Version: 0.0.0.9000
+Authors@R: person("Nicholas", "Tierney", 
+                  email = "nicholas.tierney@gmail.com", 
+                  role = c("aut", "cre"))
+Description: Makes it easy to grab data from the Australian Road Deaths Database
+Depends: R (>= 3.4.2)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
