@@ -1,4 +1,11 @@
-#' Retrieve the data of fatalities from Australian Road Deaths Database
+#' Get the australian fatal crash data
+#'
+#' The Australian Road Deaths Database provides basic details of road transport
+#'     crash fatalities in Australia as reported by the police each month to the
+#'     State and Territory road safety authorities. Details provided in the database
+#'     fall into two groups: 1) the circumstances of the crash, for example, date,
+#'     location, crash type, 2)some details regarding the persons killed, for
+#'     example, age, gender and road user group. This is the second one.
 #'
 #' @return a data.frame
 #' \describe{
@@ -17,7 +24,7 @@
 #'   \item{`speed_limit`}{Integer, posted speed limit at the location of crash}
 #'   \item{`road_user`}{Text, Type of person killed. Driver, Passenger, Pedestrian, Motorcycle Rider, Motorcycle Passenger, Bicyclist (including pillion passengers)}
 #'   \item{`gender`}{Text, Biological Sex of person killed, Male, Female, Unknown}
-#'   \item{`age`}{Integer, Age of person killed, in years}
+#'   \item{`age`}{Integer, Age of person killed, in years}}
 #'
 #' @export
 #'
@@ -25,7 +32,7 @@
 #' \dontrun{
 #' get_oz_fatal()
 #' }
-get_oz_fatal <- function() {
+oz_road_fatalities <- function() {
   suppressMessages(suppressWarnings(
     dat_fatal_raw <-readr::read_csv(
         "https://bitre.gov.au/statistics/safety/files/Fatalities_September_2017.csv"
