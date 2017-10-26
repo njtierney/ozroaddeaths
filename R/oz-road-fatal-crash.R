@@ -23,7 +23,10 @@ globalVariables(
     "road_user",
     "speed_limit",
     "time",
-    "weekday"
+    "weekday",
+    "year",
+    "state",
+    "age"
   )
 )
 
