@@ -3,11 +3,11 @@
 \name{get_oz_fatal_crash}
 \alias{get_oz_fatal_crash}
 \title{Get the australian fatal crash data}
+\source{
+\url{https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx}
+}
 \usage{
 get_oz_fatal_crash()
-}
-\value{
-a dataset (tibble) of fatal crash data
 }
 \description{
 Get the australian fatal crash data

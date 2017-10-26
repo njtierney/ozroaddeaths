@@ -6,6 +6,7 @@
 #' variables.
 #' \describe{
 #'   \item{`crash_id`}{An integer, 13 digits, unique to each crash}
+#'   \item{`state`}{}
 #'   \item{``}{}
 #'   \item{``}{}
 #'   \item{``}{}
@@ -17,10 +18,10 @@
 #'   \item{``}{}
 #'   \item{``}{}
 #'   \item{``}{}
-#'   \item{``}{}
-#' @source \url{http://www.pmel.noaa.gov/tao/data_deliv/deliv.html}
-#' @keywords datasets
+#' @source \url{https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx}
 #' @export
+#'
+
 
 #' @examples
 #' \dontrun{
