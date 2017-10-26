@@ -1,13 +1,23 @@
 Package: ozcrash
 Title: Pulls Data From Australian Road Deaths Database
-Version: 0.0.0.9000
-Authors@R: person("Nicholas", "Tierney", 
-                  email = "nicholas.tierney@gmail.com", 
-                  role = c("aut", "cre"))
-Description: Makes it easy to grab data from the Australian Road Deaths Database
+Version: 0.0.1.9000
+Authors@R: c(
+  person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", c("aut", "cre")),
+  person("Maddie", "Davey", , "madeline.davey@uq.edu.au", role = c("aut")),
+  person("Justin", "Carmody", , "carmodyj1@student.unimelb.edu.au", role = c("aut")),
+  person("Steph", "de Silva", , "steph@rex-analytics.com", role = c("aut")),
+  person("Mathew","Ling", , "m.ling@deakin.edu.au", role = c("ctb")),
+  person("Michael","Sumner", , "mdsumner@gmail.com", role = c("ctb"))
+  )
+Description: Makes it easy to fetch cleaned up data from the Australian Road 
+    Deaths Database.
 Depends: R (>= 3.4.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000
-Imports: magrittr
+Imports: magrittr,
+    janitor,
+    dplyr,
+    readr,
+    lubridate
