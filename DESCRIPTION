@@ -1,6 +1,6 @@
-Package: ozcrash
+Package: ozroaddeaths
 Title: Pulls Data From Australian Road Deaths Database
-Version: 0.0.1.9000
+Version: 0.0.2.9000
 Authors@R: c(
   person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", c("aut", "cre")),
   person("Maddie", "Davey", , "madeline.davey@uq.edu.au", role = c("aut")),
@@ -9,8 +9,14 @@ Authors@R: c(
   person("Mathew","Ling", , "m.ling@deakin.edu.au", role = c("ctb")),
   person("Michael","Sumner", , "mdsumner@gmail.com", role = c("ctb"))
   )
-Description: Makes it easy to fetch cleaned up data from the Australian Road 
-    Deaths Database.
+Description: ozroaddeaths is a package that pulls data from the Australian Road 
+    Deaths Database, run by the Bureau of Infrastructure, Transport and Regional
+    Economics (BITRE). This provides basic details of road transport crash
+    fatalities in Australia as reported by the police each month to the State
+    and Territory road safety authorities. The details provided in the
+    database fall into two groups: 1) the circumstances of the crash, for
+    example, date, location, crash type some details regarding the persons
+    killed, for example, age, gender and road user group.
 Depends: R (>= 3.4.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
