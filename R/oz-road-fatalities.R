@@ -4,7 +4,8 @@
 #'     Specifically, the details regarding the persons killed, for
 #'     example, age, gender and road user group.
 #'
-#' @return a data.frame
+#' @return a dataset (tibble) of fatal crash data
+#'
 #' \describe{
 #'   \item{`crash_id`}{An integer, 13 digits, unique to each crash}
 #'   \item{`state`}{Text, Austraian jurisdiction, Abbreviation for each state and territory. QLD = Queensland, NSW = New South Wales, ACT = Australian Capital Territory, VIC = Victoria, TAS = TASMANIA, SA = South Australia, WA = Western Australian, NT = Northern Territory}
