@@ -6,9 +6,6 @@
 \usage{
 get_oz_fatal()
 }
-\value{
-a data.frame
-}
 \description{
 Retrieve the data of fatalities from Australian Road Deaths Database
 }
