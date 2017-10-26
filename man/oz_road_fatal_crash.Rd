@@ -2,7 +2,7 @@
 % Please edit documentation in R/oz-road-fatal-crash.R
 \name{oz_road_fatal_crash}
 \alias{oz_road_fatal_crash}
-\title{Get the australian fatal crash data}
+\title{Retrieve Australian Fatal Crash Data}
 \source{
 \url{https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx}
 }
@@ -30,15 +30,12 @@ variables.
   \item{`speed_limit`}{Integer, posted speed limit at the location of crash}}
 }
 \description{
-The Australian Road Deaths Database provides basic details of road transport
-    crash fatalities in Australia as reported by the police each month to the
-    State and Territory road safety authorities. Details provided in the database
-    fall into two groups: 1) the circumstances of the crash, for example, date,
-    location, crash type, 2)some details regarding the persons killed, for
-    example, age, gender and road user group. This is the first one.
+This function pulls data from the Australian Road Deaths Database,
+    specifically, the circumstances of the crash, for example, date,
+    location, crash type.
 }
 \examples{
 \dontrun{
-oz_fatal_crash()
+oz_road_fatal_crash
 }
 }

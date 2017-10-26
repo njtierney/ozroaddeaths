@@ -2,7 +2,7 @@
 % Please edit documentation in R/oz-road-fatalities.R
 \name{oz_road_fatalities}
 \alias{oz_road_fatalities}
-\title{Get the australian fatal crash data}
+\title{Retrieve Australian Fatal Crash Data}
 \usage{
 oz_road_fatalities()
 }
@@ -27,15 +27,12 @@ a data.frame
   \item{`age`}{Integer, Age of person killed, in years}}
 }
 \description{
-The Australian Road Deaths Database provides basic details of road transport
-    crash fatalities in Australia as reported by the police each month to the
-    State and Territory road safety authorities. Details provided in the database
-    fall into two groups: 1) the circumstances of the crash, for example, date,
-    location, crash type, 2)some details regarding the persons killed, for
-    example, age, gender and road user group. This is the second one.
+This function pulls data from the Australian Road Deaths Database.
+    Specifically, the details regarding the persons killed, for
+    example, age, gender and road user group.
 }
 \examples{
 \dontrun{
-get_oz_fatal()
+oz_road_fatalities
 }
 }

@@ -1,44 +1,8 @@
-
-if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
-globalVariables(
-  c("crashid",
-    "dayweek",
-    "number_of_fatalities",
-    "bus_involvement",
-    "heavy_rigid_truck_involvement",
-    "articulated_truck",
-    "articulated_truck_involvement",
-    "bus",
-    "bus_involvement",
-    "crash_id",
-    "crash_type",
-    "date_time",
-    "day",
-    "dayweek",
-    "gender",
-    "heavy_rigid_truck",
-    "hour",
-    "minute",
-    "month",
-    "road_user",
-    "speed_limit",
-    "time",
-    "weekday",
-    "year",
-    "state",
-    "age"
-  )
-)
-
-
-#' Get the australian fatal crash data
+#' Retrieve Australian Fatal Crash Data
 #'
-#' The Australian Road Deaths Database provides basic details of road transport
-#'     crash fatalities in Australia as reported by the police each month to the
-#'     State and Territory road safety authorities. Details provided in the database
-#'     fall into two groups: 1) the circumstances of the crash, for example, date,
-#'     location, crash type, 2)some details regarding the persons killed, for
-#'     example, age, gender and road user group. This is the first one.
+#' This function pulls data from the Australian Road Deaths Database,
+#'     specifically, the circumstances of the crash, for example, date,
+#'     location, crash type.
 #'
 #' @return a dataset (tibble) of fatal crash data
 #'
@@ -61,7 +25,7 @@ globalVariables(
 #' @source \url{https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx}
 #' @examples
 #' \dontrun{
-#' oz_fatal_crash()
+#' oz_road_fatal_crash
 #' }
 #' @export
 oz_road_fatal_crash <- function(){
