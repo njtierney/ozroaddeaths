@@ -27,3 +27,7 @@ Imports: magrittr,
     dplyr,
     readr,
     lubridate
+Suggests: knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
