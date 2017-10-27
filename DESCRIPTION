@@ -6,6 +6,7 @@ Authors@R: c(
   person("Maddie", "Davey", , "madeline.davey@uq.edu.au", role = c("aut")),
   person("Justin", "Carmody", , "carmodyj1@student.unimelb.edu.au", role = c("aut")),
   person("Steph", "de Silva", , "steph@rex-analytics.com", role = c("aut")),
+  person("Adam","Gruer", , "adamgruer@icloud.com", role = c("aut")),
   person("Mathew","Ling", , "m.ling@deakin.edu.au", role = c("ctb")),
   person("Michael","Sumner", , "mdsumner@gmail.com", role = c("ctb"))
   )
