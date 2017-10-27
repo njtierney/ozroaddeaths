@@ -22,6 +22,11 @@ The fatality data is updated every month.
 The heavy vehicle flags (for articulated truck, heavy rigid truck and bus involvement) are only updated each quarter, and are current to within two months. Information for heavy rigid truck involvement in crashes earlier than 2004 is incomplete.
 Citations for information derived from this database should include the database name, the webpage, and the date of access.
 
+```{r, fig.show='hide', include=FALSE}
+knitr::opts_chunk$set(fig.width=8, fig.height=5) 
+```
+
+
 ## Import data from the BITRE website into R
 ```{r import the data to tibble, message=FALSE, warning=FALSE, cache=TRUE}
 library(ozroaddeaths)
