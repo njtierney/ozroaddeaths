@@ -9,7 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The Australian Road Deaths Database provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities.
+```{r setup, fig.show='hide', include=FALSE}
+knitr::opts_chunk$set(fig.width=8, fig.height=5) 
+```
+
+
+This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx
 
 Details provided in the database fall into two groups:
 
@@ -17,28 +22,40 @@ Details provided in the database fall into two groups:
 
 * some details regarding the persons killed, for example, age, gender and road user group.
 
-### When is the data updated?
-The fatality data is updated every month.
-The heavy vehicle flags (for articulated truck, heavy rigid truck and bus involvement) are only updated each quarter, and are current to within two months. Information for heavy rigid truck involvement in crashes earlier than 2004 is incomplete.
-Citations for information derived from this database should include the database name, the webpage, and the date of access.
+The fatality data is updated every month. The heavy vehicle flags (for articulated truck, heavy rigid truck and bus involvement) are only updated each quarter, and are current to within two months. Information for heavy rigid truck involvement in crashes earlier than 2004 is incomplete.
 
-```{r, fig.show='hide', include=FALSE}
-knitr::opts_chunk$set(fig.width=8, fig.height=5) 
-```
+## Package Author's Notes
 
+Data was available at URL as at 17/10/26. Data is imported into R and cleaned by removing redundant date columns and transforming into a tidy format.
+
+### Indemnity Statement:
+
+The Bureau of Infrastructure, Transport and Regional Economics has taken due care in preparing this information. However, noting that data have been provided by third parties, the Commonwealth gives no warranty as to the accuracy, reliability, fitness for purpose, or otherwise of the information.
+
+Copyright
+
+© Commonwealth of Australia, 2017
+
+This work is copyright and the data contained in this publication should not be reproduced or used in any form without acknowledgement.
 
 ## Import data from the BITRE website into R
-```{r import the data to tibble, message=FALSE, warning=FALSE, cache=TRUE}
+
+```{r load-library, message=FALSE, warning=FALSE, cache=TRUE}
 library(ozroaddeaths)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
 library(ggridges)
-crashes <- oz_road_fatal_crash()
-fatalities <- oz_road_fatalities()
 ```
 
-## Whate variables are available?
+```{r load-data}
+
+crashes <- oz_road_fatal_crash()
+fatalities <- oz_road_fatalities()
+
+```
+
+## Variables available
 
 ### Crashes
 
@@ -57,16 +74,16 @@ knitr::kable(head(fatalities))
 ### Plot crashes by year
 
 ```{r crash plot by year, width = 10}
-crash_plot <- crashes %>%
-  ggplot(aes( x =  year, fill = year ))+
+crash_plot <- ggplot(crashes,
+                     aes(x = year,
+                         fill = year)) +
   geom_line(stat = "count") +
-
   theme_minimal() +
   ggtitle("Annual number of fatal car accidents per year")
+
 crash_plot
 
 ```
-
 
 
 ### Plot crashes by year and state
@@ -75,41 +92,40 @@ crash_plot
 
 crash_plot +
   scale_y_continuous(trans = "log2") +
-  
   facet_wrap(~state) +
    ggtitle("Annual number of fatal car accidents per year and state",
            subtitle = "log2 scale" )
-
 
 ```
 
 ### Fatalities by year
 
 ```{r fatalities plot by year, width = 10}
-fatality_plot <- fatalities %>%
-  mutate(
-    year = lubridate::year(date_time)) %>%
-  ggplot(aes( x =  year, fill = year ))+
-  geom_line(stat = "count") +
 
+fatality_plot <- fatalities %>%
+  mutate(year = lubridate::year(date_time)) %>%
+  ggplot(aes(x =  year, 
+             fill = year)) +
+  geom_line(stat = "count") +
   theme_minimal() +
   ggtitle("Annual number of road fatalities")
+
 fatality_plot
 
 ```
 
 ```{r fatalities plot by age, width = 10}
+
 fatality_plot <- fatalities %>%
   filter(gender != "Unknown") %>%
-  mutate(
-    year = lubridate::year(date_time)) %>%
-  ggplot(aes( x =  age, fill = gender )) +
-
+  mutate(year = lubridate::year(date_time)) %>%
+  ggplot(aes(x = age, 
+             fill = gender )) +
   geom_density() +
   facet_wrap(~gender) +
-
   theme_minimal() +
   ggtitle("Distribution of road fatalities by age 1989 to 2017")
+
 fatality_plot
 
 ```
