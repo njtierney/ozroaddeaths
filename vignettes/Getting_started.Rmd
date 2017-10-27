@@ -9,50 +9,111 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+The Australian Road Deaths Database provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+Details provided in the database fall into two groups:
 
-## Vignette Info
+* the circumstances of the crash, for example, date, location, crash type
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+* some details regarding the persons killed, for example, age, gender and road user group.
 
-## Styles
+### When is the data updated?
+The fatality data is updated every month.
+The heavy vehicle flags (for articulated truck, heavy rigid truck and bus involvement) are only updated each quarter, and are current to within two months. Information for heavy rigid truck involvement in crashes earlier than 2004 is incomplete.
+Citations for information derived from this database should include the database name, the webpage, and the date of access.
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r, fig.show='hide', include=FALSE}
+knitr::opts_chunk$set(fig.width=8, fig.height=5) 
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+## Import data from the BITRE website into R
+```{r import the data to tibble, message=FALSE, warning=FALSE, cache=TRUE}
+library(ozroaddeaths)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(ggridges)
+crashes <- oz_road_fatal_crash()
+fatalities <- oz_road_fatalities()
 ```
 
-Also a quote using `>`:
+## Whate variables are available?
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+### Crashes
+
+```{r, results='asis'}
+knitr::kable(dplyr::as_data_frame(names(crashes)))
+knitr::kable(head(crashes))
+```
+
+### Fatalities
+
+```{r fatalities first look, results='asis'}
+knitr::kable(dplyr::as_data_frame(names(fatalities)))
+knitr::kable(head(fatalities))
+```
+
+### Plot crashes by year
+
+```{r crash plot by year, width = 10}
+crash_plot <- crashes %>%
+  ggplot(aes( x =  year, fill = year ))+
+  geom_line(stat = "count") +
+
+  theme_minimal() +
+  ggtitle("Annual number of fatal car accidents per year")
+crash_plot
+
+```
+
+
+
+### Plot crashes by year and state
+
+```{r crash plot by year and state, width = 10}
+
+crash_plot +
+  scale_y_continuous(trans = "log2") +
+  
+  facet_wrap(~state) +
+   ggtitle("Annual number of fatal car accidents per year and state",
+           subtitle = "log2 scale" )
+
+
+```
+
+### Fatalities by year
+
+```{r fatalities plot by year, width = 10}
+fatality_plot <- fatalities %>%
+  mutate(
+    year = lubridate::year(date_time)) %>%
+  ggplot(aes( x =  year, fill = year ))+
+  geom_line(stat = "count") +
+
+  theme_minimal() +
+  ggtitle("Annual number of road fatalities")
+fatality_plot
+
+```
+
+```{r fatalities plot by age, width = 10}
+fatality_plot <- fatalities %>%
+  filter(gender != "Unknown") %>%
+  mutate(
+    year = lubridate::year(date_time)) %>%
+  ggplot(aes( x =  age, fill = gender )) +
+
+  geom_density() +
+  facet_wrap(~gender) +
+
+  theme_minimal() +
+  ggtitle("Distribution of road fatalities by age 1989 to 2017")
+fatality_plot
+
+```
+
+
+
+

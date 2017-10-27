@@ -30,5 +30,6 @@ Imports: magrittr,
     lubridate
 Suggests: knitr,
     rmarkdown,
-    testthat
+    testthat,
+    ggplot2
 VignetteBuilder: knitr
