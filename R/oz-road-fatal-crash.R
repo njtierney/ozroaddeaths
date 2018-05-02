@@ -36,8 +36,7 @@ oz_road_fatal_crash <- function(){
 
   dat_fatal_crash_clean <- dat_fatal_crash_raw %>%
     janitor::clean_names() %>%
-    dplyr::rename(crash_id = crashid,
-                  weekday = dayweek,
+    dplyr::rename(weekday = dayweek,
                   n_fatalities = number_of_fatalities,
                   bus = bus_involvement,
                   heavy_rigid_truck = heavy_rigid_truck_involvement,
