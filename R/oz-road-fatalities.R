@@ -49,8 +49,7 @@ oz_road_fatalities <- function() {
                   weekday = lubridate::wday(date_time, label = TRUE, abbr = FALSE),
                   month = lubridate::month(date_time, label = TRUE, abbr = FALSE),
                   time = format(date_time, "%H:%M")) %>%
-    dplyr::rename(crash_id = crashid,
-                  bus = bus_involvement,
+    dplyr::rename(bus = bus_involvement,
                   heavy_rigid_truck = heavy_rigid_truck_involvement,
                   articulated_truck = articulated_truck_involvement) %>%
     dplyr::select(crash_id,
