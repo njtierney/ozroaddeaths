@@ -31,5 +31,6 @@ Imports: magrittr,
 Suggests: knitr,
     rmarkdown,
     testthat,
-    ggplot2
+    ggplot2,
+    ggridges
 VignetteBuilder: knitr
