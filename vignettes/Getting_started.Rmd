@@ -14,7 +14,7 @@ knitr::opts_chunk$set(fig.width=8, fig.height=5)
 ```
 
 
-This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx
+This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: https://data.gov.au/dataset/ds-dga-5b530fb8-526e-4fbf-b0f6-aa24e84e4277/details?q=crash
 
 Details provided in the database fall into two groups:
 
@@ -26,7 +26,7 @@ The fatality data is updated every month. The heavy vehicle flags (for articulat
 
 ## Package Author's Notes
 
-Data was available at URL as at 17/10/26. Data is imported into R and cleaned by removing redundant date columns and transforming into a tidy format.
+Data was available at URL as at 12th December 2019. Data is imported into R, cleaned and transformed into a tidy format.
 
 ### Indemnity Statement:
 
