@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-author: "Adam Gruer"
+author: "Adam Gruer (+Kristy Robledo)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(fig.width=8, fig.height=5)
 ```
 
 
-This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx
+This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: https://data.gov.au/dataset/ds-dga-5b530fb8-526e-4fbf-b0f6-aa24e84e4277/details?q=crash
 
 Details provided in the database fall into two groups:
 
@@ -26,7 +26,7 @@ The fatality data is updated every month. The heavy vehicle flags (for articulat
 
 ## Package Author's Notes
 
-Data was available at URL as at 17/10/26. Data is imported into R and cleaned by removing redundant date columns and transforming into a tidy format.
+Data was available at URL as at 12th December 2019. Data is imported into R, cleaned and transformed into a tidy format.
 
 ### Indemnity Statement:
 
@@ -34,7 +34,7 @@ The Bureau of Infrastructure, Transport and Regional Economics has taken due car
 
 Copyright
 
-© Commonwealth of Australia, 2017
+© Commonwealth of Australia, 2019
 
 This work is copyright and the data contained in this publication should not be reproduced or used in any form without acknowledgement.
 
@@ -45,7 +45,7 @@ library(ozroaddeaths)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
-library(ggridges)
+#library(ggridges)
 ```
 
 ```{r load-data}
@@ -60,14 +60,12 @@ fatalities <- oz_road_fatalities()
 ### Crashes
 
 ```{r, results='asis'}
-knitr::kable(dplyr::as_data_frame(names(crashes)))
 knitr::kable(head(crashes))
 ```
 
 ### Fatalities
 
 ```{r fatalities first look, results='asis'}
-knitr::kable(dplyr::as_data_frame(names(fatalities)))
 knitr::kable(head(fatalities))
 ```
 
@@ -117,14 +115,14 @@ fatality_plot
 ```{r fatalities plot by age, width = 10}
 
 fatality_plot <- fatalities %>%
-  filter(gender != "Unknown") %>%
+  filter(gender != "Unspecified") %>%
   mutate(year = lubridate::year(date_time)) %>%
   ggplot(aes(x = age, 
              fill = gender )) +
   geom_density() +
   facet_wrap(~gender) +
   theme_minimal() +
-  ggtitle("Distribution of road fatalities by age 1989 to 2017")
+  ggtitle("Distribution of road fatalities by age 1989 to 2019")
 
 fatality_plot
 

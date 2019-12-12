@@ -3,7 +3,6 @@
 \docType{package}
 \name{ozroaddeaths}
 \alias{ozroaddeaths}
-\alias{ozroaddeaths-package}
 \title{ozroaddeaths}
 \description{
 ozroaddeaths is a package that pulls data from the Australian Road Deaths

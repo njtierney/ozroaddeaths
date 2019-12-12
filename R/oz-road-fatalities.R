@@ -9,7 +9,7 @@
 #' \describe{
 #'   \item{`crash_id`}{An integer, 13 digits, unique to each crash}
 #'   \item{`state`}{Text, Austraian jurisdiction, Abbreviation for each state and territory. QLD = Queensland, NSW = New South Wales, ACT = Australian Capital Territory, VIC = Victoria, TAS = TASMANIA, SA = South Australia, WA = Western Australian, NT = Northern Territory}
-#'   \item{`Date`}{Date, Year, Month and Day. This is the date of the crash}
+#'   \item{`Date`}{Date, Year, Month and Day. This is the date of the crash, but with unknown day so set to the 1st}
 #'   \item{`Months`}{Integer, the month of the date of the crash}
 #'   \item{`year`}{Integer, the year of the date of the crash}
 #'   \item{`weekday`}{Text the weekday of the date of the crash}
@@ -32,24 +32,16 @@
 #' }
 oz_road_fatalities <- function() {
   suppressMessages(suppressWarnings(
-    dat_fatal_raw <-readr::read_csv(
-        "https://bitre.gov.au/statistics/safety/files/Fatalities_September_2017.csv"
-      )
+    dat_fatal_raw <-readr::read_csv("https://data.gov.au/data/dataset/5b530fb8-526e-4fbf-b0f6-aa24e84e4277/resource/fd646fdc-7788-4bea-a736-e4aeb0dd09a8/download/ardd_fatalities.csv"
+)
   ))
 
   dat_fatal_clean <- dat_fatal_raw %>%
     janitor::clean_names() %>%
-    dplyr::mutate(date_time = ISOdatetime(year = year,
-                                          month = month,
-                                          day = day,
-                                          hour = hour,
-                                          min = minute,
-                                          sec = 0,
-                                          tz = "UTC"),
-                  weekday = lubridate::wday(date_time, label = TRUE, abbr = FALSE),
-                  month = lubridate::month(date_time, label = TRUE, abbr = FALSE),
-                  time = format(date_time, "%H:%M")) %>%
+    dplyr::mutate(date = lubridate::make_date(year, month, 1),
+                  date_time = lubridate::as_datetime(paste(date,time))) %>%
     dplyr::rename(bus = bus_involvement,
+                  weekday = dayweek,
                   heavy_rigid_truck = heavy_rigid_truck_involvement,
                   articulated_truck = articulated_truck_involvement) %>%
     dplyr::select(crash_id,
@@ -65,7 +57,9 @@ oz_road_fatalities <- function() {
                   speed_limit,
                   road_user,
                   gender,
-                  age)
+                  age) %>%
+    purrr::map(~ ifelse(.x %in% na_values_to_replace, NA, .x))
+
 
   dat_fatal_clean
 

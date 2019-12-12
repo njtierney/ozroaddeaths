@@ -12,7 +12,7 @@ a dataset (tibble) of fatal crash data
 \describe{
   \item{`crash_id`}{An integer, 13 digits, unique to each crash}
   \item{`state`}{Text, Austraian jurisdiction, Abbreviation for each state and territory. QLD = Queensland, NSW = New South Wales, ACT = Australian Capital Territory, VIC = Victoria, TAS = TASMANIA, SA = South Australia, WA = Western Australian, NT = Northern Territory}
-  \item{`Date`}{Date, Year, Month and Day. This is the date of the crash}
+  \item{`Date`}{Date, Year, Month and Day. This is the date of the crash, but with unknown day so set to the 1st}
   \item{`Months`}{Integer, the month of the date of the crash}
   \item{`year`}{Integer, the year of the date of the crash}
   \item{`weekday`}{Text the weekday of the date of the crash}
