@@ -34,6 +34,8 @@ oz_road_fatal_crash <- function(){
   dat_fatal_crash_raw <- readr::read_csv("https://data.gov.au/data/dataset/5b530fb8-526e-4fbf-b0f6-aa24e84e4277/resource/d54f7465-74b8-4fff-8653-37e724d0ebbb/download/ardd_fatal_crashes.csv")
   ))
 
+  na_values_to_replace<-c(-9, "-9")
+
   dat_fatal_crash_clean <- dat_fatal_crash_raw %>%
     janitor::clean_names() %>%
     dplyr::rename(weekday = dayweek,
@@ -57,7 +59,10 @@ oz_road_fatal_crash <- function(){
                   heavy_rigid_truck,
                   articulated_truck,
                   speed_limit) %>%
-    naniar::replace_with_na_all(condition = ~.x == -9)
+    purrr::map(~ ifelse(.x %in% na_values_to_replace, NA, .x))
+
+
+
 
 dat_fatal_crash_clean
 

@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-author: "Adam Gruer"
+author: "Adam Gruer (+Kristy Robledo)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

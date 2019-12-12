@@ -58,7 +58,8 @@ oz_road_fatalities <- function() {
                   road_user,
                   gender,
                   age) %>%
-    naniar::replace_with_na_all(condition = ~.x == -9)
+    purrr::map(~ ifelse(.x %in% na_values_to_replace, NA, .x))
+
 
   dat_fatal_clean
 
