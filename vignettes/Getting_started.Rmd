@@ -34,7 +34,7 @@ The Bureau of Infrastructure, Transport and Regional Economics has taken due car
 
 Copyright
 
-© Commonwealth of Australia, 2017
+© Commonwealth of Australia, 2019
 
 This work is copyright and the data contained in this publication should not be reproduced or used in any form without acknowledgement.
 
@@ -45,7 +45,7 @@ library(ozroaddeaths)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
-library(ggridges)
+#library(ggridges)
 ```
 
 ```{r load-data}
@@ -60,14 +60,12 @@ fatalities <- oz_road_fatalities()
 ### Crashes
 
 ```{r, results='asis'}
-knitr::kable(dplyr::as_data_frame(names(crashes)))
 knitr::kable(head(crashes))
 ```
 
 ### Fatalities
 
 ```{r fatalities first look, results='asis'}
-knitr::kable(dplyr::as_data_frame(names(fatalities)))
 knitr::kable(head(fatalities))
 ```
 
@@ -117,14 +115,14 @@ fatality_plot
 ```{r fatalities plot by age, width = 10}
 
 fatality_plot <- fatalities %>%
-  filter(gender != "Unknown") %>%
+  filter(gender != "Unspecified") %>%
   mutate(year = lubridate::year(date_time)) %>%
   ggplot(aes(x = age, 
              fill = gender )) +
   geom_density() +
   facet_wrap(~gender) +
   theme_minimal() +
-  ggtitle("Distribution of road fatalities by age 1989 to 2017")
+  ggtitle("Distribution of road fatalities by age 1989 to 2019")
 
 fatality_plot
 
