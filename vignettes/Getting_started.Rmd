@@ -50,7 +50,7 @@ library(lubridate)
 
 ```{r load-data}
 
-crashes <- oz_road_fatal_crash()
+crashes <- oz_road_fatal_crash() 
 fatalities <- oz_road_fatalities()
 
 ```

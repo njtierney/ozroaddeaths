@@ -29,7 +29,8 @@ Imports:
     dplyr,
     readr,
     lubridate,
-    purrr
+    purrr,
+    hms
 Suggests: knitr,
     rmarkdown,
     testthat,

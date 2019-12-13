@@ -42,7 +42,8 @@ knitr::opts_chunk$set(fig.width=8, fig.height=5)
 ```
 
 
-This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx
+This data is taken from the Australian Road Deaths Database, which provides basic details of road transport crash fatalities in Australia as reported by the police each month to the State and Territory road safety authorities, obtained from: 
+https://data.gov.au/dataset/ds-dga-5b530fb8-526e-4fbf-b0f6-aa24e84e4277/details?q=crash
 
 Details provided in the database fall into two groups:
 
@@ -51,10 +52,11 @@ Details provided in the database fall into two groups:
 * some details regarding the persons killed, for example, age, gender and road user group.
 
 The fatality data is updated every month. The heavy vehicle flags (for articulated truck, heavy rigid truck and bus involvement) are only updated each quarter, and are current to within two months. Information for heavy rigid truck involvement in crashes earlier than 2004 is incomplete.
+There is no day of the month for the data, so we have imputed this as the first of the month. 
 
 ## Package Author's Notes
 
-Data was available at URL as at 17/10/26. Data is imported into R and cleaned by removing redundant date columns and transforming into a tidy format.
+Data was available at URL as at 13th December 2019. Data is imported into R and cleaned by removing redundant date columns and transforming into a tidy format.
 
 ### Indemnity Statement:
 
@@ -68,7 +70,7 @@ This work is copyright and the data contained in this publication should not be 
 
 ## Import data from the BITRE website into R
 
-```{r load-library, message=FALSE, warning=FALSE, cache=TRUE}
+```{r load-library, message=FALSE, warning=FALSE}
 library(ozroaddeaths)
 library(dplyr)
 library(ggplot2)
@@ -77,8 +79,7 @@ library(ggridges)
 ```
 
 ```{r load-data}
-
-crashes <- oz_road_fatal_crash()
+crashes <- oz_road_fatal_crash() 
 fatalities <- oz_road_fatalities()
 
 ```
@@ -145,7 +146,7 @@ fatality_plot
 ```{r fatalities plot by age, width = 10}
 
 fatality_plot <- fatalities %>%
-  filter(gender != "Unknown") %>%
+  filter(gender != "Unspecified") %>%
   mutate(year = lubridate::year(date_time)) %>%
   ggplot(aes(x = age, 
              fill = gender )) +
