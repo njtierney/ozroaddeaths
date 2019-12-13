@@ -36,17 +36,17 @@ oz_road_fatalities <- function() {
 )
   ))
 
+  na_values_to_replace<-c(-9, "-9")
+
   dat_fatal_clean <- dat_fatal_raw %>%
     janitor::clean_names() %>%
-    dplyr::mutate(date = lubridate::make_date(year, month, 1),
-                  date_time = lubridate::as_datetime(paste(date,time))) %>%
     dplyr::rename(bus = bus_involvement,
                   weekday = dayweek,
                   heavy_rigid_truck = heavy_rigid_truck_involvement,
                   articulated_truck = articulated_truck_involvement) %>%
     dplyr::select(crash_id,
-                  date_time,
                   month,
+                  year,
                   weekday,
                   time,
                   state,
@@ -58,7 +58,10 @@ oz_road_fatalities <- function() {
                   road_user,
                   gender,
                   age) %>%
-    purrr::map(~ ifelse(.x %in% na_values_to_replace, NA, .x))
+    purrr::map_dfr(~ ifelse(.x %in% na_values_to_replace, NA, .x)) %>%
+    dplyr::mutate(date = lubridate::make_date(year, month, 1),
+                  time = hms::as_hms(time),
+                  date_time = lubridate::as_datetime(paste(date,time)))
 
 
   dat_fatal_clean
