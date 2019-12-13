@@ -36,7 +36,7 @@ oz_road_fatalities <- function() {
 )
   ))
 
-  na_values_to_replace<-c(-9, "-9")
+na_values_to_replace<-c(-9, "-9")
 
   dat_fatal_clean <- dat_fatal_raw %>%
     janitor::clean_names() %>%
