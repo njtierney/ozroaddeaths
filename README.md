@@ -1,7 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ozroaddeaths [![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/ozroaddeaths.svg?branch=master)](https://travis-ci.org/ropenscilabs/ozroaddeaths) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropenscilabs/ozroaddeaths?branch=master&svg=true)](https://ci.appveyor.com/project/ropenscilabs/ozroaddeaths)
+# ozroaddeaths
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/njtierney/ozroaddeaths/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/ozroaddeaths/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/njtierney/ozroaddeaths/graph/badge.svg)](https://app.codecov.io/gh/njtierney/ozroaddeaths)
+<!-- badges: end -->
 
 ozroaddeaths is a package that pulls data from the Australian Road
 Deaths Database, run by the Bureau of Infrastructure, Transport and
@@ -21,8 +27,8 @@ provided in the database fall into two groups:
 You can install ozroaddeaths from github with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("ropenscilabs/ozroaddeaths")
+# install.packages("pak")
+pak::pak("njtierney/ozroaddeaths")
 ```
 
 This data is taken from the Australian Road Deaths Database, which
@@ -33,11 +39,11 @@ safety authorities, obtained from:
 
 Details provided in the database fall into two groups:
 
-  - the circumstances of the crash, for example, date, location, crash
-    type
+- the circumstances of the crash, for example, date, location, crash
+  type
 
-  - some details regarding the persons killed, for example, age, gender
-    and road user group.
+- some details regarding the persons killed, for example, age, gender
+  and road user group.
 
 The fatality data is updated every month. The heavy vehicle flags (for
 articulated truck, heavy rigid truck and bus involvement) are only
@@ -88,39 +94,43 @@ fatalities <- oz_road_fatalities()
 
 ``` r
 knitr::kable(dplyr::as_data_frame(names(crashes)))
-#> Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
-#> This warning is displayed once per session.
+#> Warning: `as_data_frame()` was deprecated in tibble 2.0.0.
+#> ℹ Please use `as_tibble()` (with slightly different semantics) to convert to a
+#>   tibble, or `as.data.frame()` to convert to a data frame.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
-| value               |
-| :------------------ |
-| crash\_id           |
-| n\_fatalities       |
-| month               |
-| year                |
-| weekday             |
-| time                |
-| state               |
-| crash\_type         |
-| bus                 |
-| heavy\_rigid\_truck |
-| articulated\_truck  |
-| speed\_limit        |
-| date                |
-| date\_time          |
+| value             |
+|:------------------|
+| crash_id          |
+| n_fatalities      |
+| month             |
+| year              |
+| weekday           |
+| time              |
+| state             |
+| crash_type        |
+| bus               |
+| heavy_rigid_truck |
+| articulated_truck |
+| speed_limit       |
+| date              |
+| date_time         |
 
 ``` r
 knitr::kable(head(crashes))
 ```
 
-| crash\_id | n\_fatalities | month | year | weekday   | time     | state | crash\_type | bus | heavy\_rigid\_truck | articulated\_truck | speed\_limit | date       | date\_time          |
-| --------: | ------------: | ----: | ---: | :-------- | :------- | :---- | :---------- | :-- | :------------------ | :----------------- | -----------: | :--------- | :------------------ |
-|  20193047 |             1 |    10 | 2019 | Thursday  | 11:00:00 | Qld   | Single      | No  | No                  | No                 |          100 | 2019-10-01 | 2019-10-01 11:00:00 |
-|  20192202 |             1 |    10 | 2019 | Thursday  | 21:06:00 | Vic   | Pedestrian  | NA  | NA                  | NA                 |           NA | 2019-10-01 | 2019-10-01 21:06:00 |
-|  20191179 |             1 |    10 | 2019 | Wednesday | 06:45:00 | NSW   | Pedestrian  | No  | No                  | No                 |           50 | 2019-10-01 | 2019-10-01 06:45:00 |
-|  20192073 |             1 |    10 | 2019 | Wednesday | 07:15:00 | Vic   | Single      | NA  | NA                  | NA                 |           NA | 2019-10-01 | 2019-10-01 07:15:00 |
-|  20193053 |             1 |    10 | 2019 | Tuesday   | 15:00:00 | Qld   | Multiple    | No  | Yes                 | No                 |          100 | 2019-10-01 | 2019-10-01 15:00:00 |
-|  20192029 |             1 |    10 | 2019 | Tuesday   | 12:03:00 | Vic   | Multiple    | NA  | Yes                 | NA                 |          100 | 2019-10-01 | 2019-10-01 12:03:00 |
+| crash_id | n_fatalities | month | year | weekday | time | state | crash_type | bus | heavy_rigid_truck | articulated_truck | speed_limit | date | date_time |
+|---:|---:|---:|---:|:---|:---|:---|:---|:---|:---|:---|---:|:---|:---|
+| 20233052 | 1 | 10 | 2023 | Saturday | 23:00:00 | Qld | Single | No | No | No | 70 | 2023-10-01 | 2023-10-01 23:00:00 |
+| 20233053 | 1 | 10 | 2023 | Sunday | 16:00:00 | Qld | Multiple | No | No | No | 60 | 2023-10-01 | 2023-10-01 16:00:00 |
+| 20231113 | 1 | 10 | 2023 | Saturday | 00:05:00 | NSW | Single | No | No | No | 100 | 2023-10-01 | 2023-10-01 00:05:00 |
+| 20237008 | 1 | 10 | 2023 | Friday | NA | NT | Single | No | No | No | NA | 2023-10-01 | 2023-10-01 00:00:00 |
+| 20234067 | 1 | 10 | 2023 | Sunday | 22:28:00 | SA | Single | No | No | No | 60 | 2023-10-01 | 2023-10-01 22:28:00 |
+| 20235100 | 1 | 10 | 2023 | Sunday | 20:43:00 | WA | Single | No | No | No | NA | 2023-10-01 | 2023-10-01 20:43:00 |
 
 ### Fatalities
 
@@ -128,37 +138,37 @@ knitr::kable(head(crashes))
 knitr::kable(dplyr::as_data_frame(names(fatalities)))
 ```
 
-| value               |
-| :------------------ |
-| crash\_id           |
-| month               |
-| year                |
-| weekday             |
-| time                |
-| state               |
-| crash\_type         |
-| bus                 |
-| heavy\_rigid\_truck |
-| articulated\_truck  |
-| speed\_limit        |
-| road\_user          |
-| gender              |
-| age                 |
-| date                |
-| date\_time          |
+| value             |
+|:------------------|
+| crash_id          |
+| month             |
+| year              |
+| weekday           |
+| time              |
+| state             |
+| crash_type        |
+| bus               |
+| heavy_rigid_truck |
+| articulated_truck |
+| speed_limit       |
+| road_user         |
+| gender            |
+| age               |
+| date              |
+| date_time         |
 
 ``` r
 knitr::kable(head(fatalities))
 ```
 
-| crash\_id | month | year | weekday   | time     | state | crash\_type | bus | heavy\_rigid\_truck | articulated\_truck | speed\_limit | road\_user       | gender | age | date       | date\_time          |
-| --------: | ----: | ---: | :-------- | :------- | :---- | :---------- | :-- | :------------------ | :----------------- | -----------: | :--------------- | :----- | --: | :--------- | :------------------ |
-|  20193047 |    10 | 2019 | Thursday  | 11:00:00 | Qld   | Single      | No  | No                  | No                 |          100 | Driver           | Male   |  25 | 2019-10-01 | 2019-10-01 11:00:00 |
-|  20192202 |    10 | 2019 | Thursday  | 21:06:00 | Vic   | Pedestrian  | NA  | NA                  | NA                 |           NA | Pedestrian       | Female |  64 | 2019-10-01 | 2019-10-01 21:06:00 |
-|  20191179 |    10 | 2019 | Wednesday | 06:45:00 | NSW   | Pedestrian  | No  | No                  | No                 |           50 | Pedestrian       | Female |  81 | 2019-10-01 | 2019-10-01 06:45:00 |
-|  20192073 |    10 | 2019 | Wednesday | 07:15:00 | Vic   | Single      | NA  | NA                  | NA                 |           NA | Passenger        | Male   |  25 | 2019-10-01 | 2019-10-01 07:15:00 |
-|  20193053 |    10 | 2019 | Tuesday   | 15:00:00 | Qld   | Multiple    | No  | Yes                 | No                 |          100 | Motorcycle rider | Male   |  35 | 2019-10-01 | 2019-10-01 15:00:00 |
-|  20191220 |    10 | 2019 | Tuesday   | 06:40:00 | NSW   | Multiple    | Yes | No                  | No                 |           80 | Motorcycle rider | Male   |  28 | 2019-10-01 | 2019-10-01 06:40:00 |
+| crash_id | month | year | weekday | time | state | crash_type | bus | heavy_rigid_truck | articulated_truck | speed_limit | road_user | gender | age | date | date_time |
+|---:|---:|---:|:---|:---|:---|:---|:---|:---|:---|---:|:---|:---|---:|:---|:---|
+| 20237008 | 10 | 2023 | Friday | NA | NT | Single | No | No | No | NA | Driver | Female | 24 | 2023-10-01 | 2023-10-01 00:00:00 |
+| 20234009 | 10 | 2023 | Saturday | 03:00:00 | SA | Single | No | No | No | 100 | Driver | Male | 22 | 2023-10-01 | 2023-10-01 03:00:00 |
+| 20233087 | 10 | 2023 | Saturday | 03:00:00 | Qld | Single | No | No | No | 80 | Driver | Male | 19 | 2023-10-01 | 2023-10-01 03:00:00 |
+| 20233149 | 10 | 2023 | Sunday | 03:00:00 | Qld | Single | No | No | No | 60 | Passenger | Male | 37 | 2023-10-01 | 2023-10-01 03:00:00 |
+| 20233190 | 10 | 2023 | Sunday | 03:00:00 | Qld | Multiple | No | No | No | 100 | Motorcycle rider | Male | 35 | 2023-10-01 | 2023-10-01 03:00:00 |
+| 20233052 | 10 | 2023 | Saturday | 23:00:00 | Qld | Single | No | No | No | 70 | Driver | Female | 32 | 2023-10-01 | 2023-10-01 23:00:00 |
 
 ### Plot crashes by year
 
@@ -171,9 +181,14 @@ crash_plot <- ggplot(crashes,
   ggtitle("Annual number of fatal car accidents per year")
 
 crash_plot
+#> Warning: The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 ```
 
-![](README-crash%20plot%20by%20year-1.png)<!-- -->
+![](man/figures/README-crash%20plot%20by%20year-1.png)<!-- -->
 
 ### Plot crashes by year and state
 
@@ -184,9 +199,49 @@ crash_plot +
   facet_wrap(~state) +
    ggtitle("Annual number of fatal car accidents per year and state",
            subtitle = "log2 scale" )
+#> Warning: The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 ```
 
-![](README-crash%20plot%20by%20year%20and%20state-1.png)<!-- -->
+![](man/figures/README-crash%20plot%20by%20year%20and%20state-1.png)<!-- -->
 
 ### Fatalities by year
 
@@ -201,9 +256,14 @@ fatality_plot <- fatalities %>%
   ggtitle("Annual number of road fatalities")
 
 fatality_plot
+#> Warning: The following aesthetics were dropped during statistical transformation: fill.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 ```
 
-![](README-fatalities%20plot%20by%20year-1.png)<!-- -->
+![](man/figures/README-fatalities%20plot%20by%20year-1.png)<!-- -->
 
 ``` r
 
@@ -218,7 +278,11 @@ fatality_plot <- fatalities %>%
   ggtitle("Distribution of road fatalities by age 1989 to 2017")
 
 fatality_plot
-#> Warning: Removed 82 rows containing non-finite values (stat_density).
+#> Warning: Removed 98 rows containing non-finite outside the scale range
+#> (`stat_density()`).
+#> Warning: Groups with fewer than two data points have been dropped.
+#> Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+#> -Inf
 ```
 
-![](README-fatalities%20plot%20by%20age-1.png)<!-- -->
+![](man/figures/README-fatalities%20plot%20by%20age-1.png)<!-- -->
