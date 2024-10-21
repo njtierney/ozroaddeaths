@@ -188,12 +188,11 @@ crash_plot
 #>   variable into a factor?
 ```
 
-![](man/figures/README-crash%20plot%20by%20year-1.png)<!-- -->
+![](man/figures/README-crash-plot-by-year-1.png)<!-- -->
 
 ### Plot crashes by year and state
 
 ``` r
-
 crash_plot +
   scale_y_continuous(trans = "log2") +
   facet_wrap(~state) +
@@ -241,12 +240,11 @@ crash_plot +
 #>   variable into a factor?
 ```
 
-![](man/figures/README-crash%20plot%20by%20year%20and%20state-1.png)<!-- -->
+![](man/figures/README-crash-plot-by-year-and-state-1.png)<!-- -->
 
 ### Fatalities by year
 
 ``` r
-
 fatality_plot <- fatalities %>%
   mutate(year = lubridate::year(date_time)) %>%
   ggplot(aes(x =  year, 
@@ -263,10 +261,9 @@ fatality_plot
 #>   variable into a factor?
 ```
 
-![](man/figures/README-fatalities%20plot%20by%20year-1.png)<!-- -->
+![](man/figures/README-fatalities-plot-by-year-1.png)<!-- -->
 
 ``` r
-
 fatality_plot <- fatalities %>%
   filter(gender != "Unspecified") %>%
   mutate(year = lubridate::year(date_time)) %>%
@@ -285,4 +282,4 @@ fatality_plot
 #> -Inf
 ```
 
-![](man/figures/README-fatalities%20plot%20by%20age-1.png)<!-- -->
+![](man/figures/README-fatalities-plot-by-age-1.png)<!-- -->

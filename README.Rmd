@@ -4,7 +4,8 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r}
+#| echo: FALSE
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -35,13 +36,18 @@ database fall into two groups:
 
 You can install ozroaddeaths from github with:
 
-```{r gh-installation, eval = FALSE}
+```{r}
+#| label: gh-installation
+#| eval: false
 # install.packages("pak")
 pak::pak("njtierney/ozroaddeaths")
 ```
 
 
-```{r setup, fig.show='hide', include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-show: hide
 knitr::opts_chunk$set(fig.width=8, fig.height=5) 
 ```
 
@@ -74,7 +80,10 @@ This work is copyright and the data contained in this publication should not be 
 
 ## Import data from the BITRE website into R
 
-```{r load-library, message=FALSE, warning=FALSE}
+```{r}
+#| label: load-library
+#| message: false
+#| warning: false
 library(ozroaddeaths)
 library(dplyr)
 library(ggplot2)
@@ -82,7 +91,8 @@ library(lubridate)
 library(ggridges)
 ```
 
-```{r load-data}
+```{r}
+#| label: load-data
 crashes <- oz_road_fatal_crash() 
 fatalities <- oz_road_fatalities()
 
@@ -92,21 +102,26 @@ fatalities <- oz_road_fatalities()
 
 ### Crashes
 
-```{r, results='asis'}
+```{r}
+#| results: asis
 knitr::kable(dplyr::as_data_frame(names(crashes)))
 knitr::kable(head(crashes))
 ```
 
 ### Fatalities
 
-```{r fatalities first look, results='asis'}
+```{r}
+#| label: fatalities-first-look
+#| results: asis
 knitr::kable(dplyr::as_data_frame(names(fatalities)))
 knitr::kable(head(fatalities))
 ```
 
 ### Plot crashes by year
 
-```{r crash plot by year, width = 10}
+```{r}
+#| label: crash-plot-by-year
+#| width: 10
 crash_plot <- ggplot(crashes,
                      aes(x = year,
                          fill = year)) +
@@ -121,7 +136,9 @@ crash_plot
 
 ### Plot crashes by year and state
 
-```{r crash plot by year and state, width = 10}
+```{r}
+#| label: crash-plot-by-year-and-state
+#| width: 10
 
 crash_plot +
   scale_y_continuous(trans = "log2") +
@@ -133,7 +150,9 @@ crash_plot +
 
 ### Fatalities by year
 
-```{r fatalities plot by year, width = 10}
+```{r}
+#| label: fatalities-plot-by-year
+#| width: 10
 
 fatality_plot <- fatalities %>%
   mutate(year = lubridate::year(date_time)) %>%
@@ -147,7 +166,9 @@ fatality_plot
 
 ```
 
-```{r fatalities plot by age, width = 10}
+```{r}
+#| label: fatalities-plot-by-age
+#| width: 10
 
 fatality_plot <- fatalities %>%
   filter(gender != "Unspecified") %>%
