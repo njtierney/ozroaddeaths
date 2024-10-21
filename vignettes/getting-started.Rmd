@@ -9,7 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, fig.show='hide', include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-show: hide
 knitr::opts_chunk$set(fig.width=8, fig.height=5) 
 ```
 
@@ -34,13 +37,17 @@ The Bureau of Infrastructure, Transport and Regional Economics has taken due car
 
 Copyright
 
-© Commonwealth of Australia, 2019
+© Commonwealth of Australia, 2024
 
 This work is copyright and the data contained in this publication should not be reproduced or used in any form without acknowledgement.
 
 ## Import data from the BITRE website into R
 
-```{r load-library, message=FALSE, warning=FALSE, cache=TRUE}
+```{r}
+#| label: load-library
+#| message: false
+#| warning: false
+#| cache: true
 library(ozroaddeaths)
 library(dplyr)
 library(ggplot2)
@@ -48,7 +55,8 @@ library(lubridate)
 #library(ggridges)
 ```
 
-```{r load-data}
+```{r}
+#| label: load-data
 
 crashes <- oz_road_fatal_crash() 
 fatalities <- oz_road_fatalities()
@@ -59,25 +67,29 @@ fatalities <- oz_road_fatalities()
 
 ### Crashes
 
-```{r, results='asis'}
+```{r}
+#| results: asis
 knitr::kable(head(crashes))
 ```
 
 ### Fatalities
 
-```{r fatalities first look, results='asis'}
+```{r}
+#| label: fatalities first look
+#| results: asis
 knitr::kable(head(fatalities))
 ```
 
 ### Plot crashes by year
 
-```{r crash plot by year, width = 10}
+```{r}
+#| label: crash-plot-by-year
+#| width: 10
 crash_plot <- ggplot(crashes,
-                     aes(x = year,
-                         fill = year)) +
+                     aes(x = year)) +
   geom_line(stat = "count") +
   theme_minimal() +
-  ggtitle("Annual number of fatal car accidents per year")
+  labs(title = "Annual number of fatal car accidents per year")
 
 crash_plot
 
@@ -86,24 +98,27 @@ crash_plot
 
 ### Plot crashes by year and state
 
-```{r crash plot by year and state, width = 10}
+```{r}
+#| label: crash-plot-by-year-and-state
+#| width: 10
 
 crash_plot +
   scale_y_continuous(trans = "log2") +
   facet_wrap(~state) +
-   ggtitle("Annual number of fatal car accidents per year and state",
-           subtitle = "log2 scale" )
+   labs(title = "Annual number of fatal car accidents per year and state",
+        subtitle = "log2 scale" )
 
 ```
 
 ### Fatalities by year
 
-```{r fatalities plot by year, width = 10}
+```{r}
+#| label: fatalities-plot-by-year
+#| width: 10
 
 fatality_plot <- fatalities %>%
   mutate(year = lubridate::year(date_time)) %>%
-  ggplot(aes(x =  year, 
-             fill = year)) +
+  ggplot(aes(x =  year)) +
   geom_line(stat = "count") +
   theme_minimal() +
   ggtitle("Annual number of road fatalities")
@@ -112,7 +127,9 @@ fatality_plot
 
 ```
 
-```{r fatalities plot by age, width = 10}
+```{r}
+#| label: fatalities-plot-by-age
+#| width: 10
 
 fatality_plot <- fatalities %>%
   filter(gender != "Unspecified") %>%
@@ -122,7 +139,7 @@ fatality_plot <- fatalities %>%
   geom_density() +
   facet_wrap(~gender) +
   theme_minimal() +
-  ggtitle("Distribution of road fatalities by age 1989 to 2019")
+  ggtitle("Distribution of road fatalities by age 1989 to 2024")
 
 fatality_plot
 
