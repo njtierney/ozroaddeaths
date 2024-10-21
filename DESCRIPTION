@@ -30,7 +30,10 @@ Imports:
     readr,
     lubridate,
     purrr,
-    hms
+    hms,
+    readxl,
+    rvest,
+    glue
 Suggests: knitr,
     rmarkdown,
     testthat,
