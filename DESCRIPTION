@@ -39,3 +39,4 @@ Suggests:
     ggridges
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+URL: https://njtierney.github.io/ozroaddeaths/

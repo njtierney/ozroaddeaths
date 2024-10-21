@@ -1,1 +1,4 @@
-destination: docs
+url: https://njtierney.github.io/ozroaddeaths/
+template:
+  bootstrap: 5
+
