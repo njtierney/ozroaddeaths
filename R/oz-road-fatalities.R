@@ -4,6 +4,10 @@
 #'     Specifically, the details regarding the persons killed, for
 #'     example, age, gender and road user group.
 #'
+#' @details There are two sources of data: data.gov.au and bitre.gov.au.
+#' While bitre.gov.au is more up-to-date, there are inconsistencies
+#' between the two sources for certain crash records.
+#'
 #' @param source Character. Either "stable" or "latest".
 #' @return a dataset (tibble) of fatal crash data
 #'
