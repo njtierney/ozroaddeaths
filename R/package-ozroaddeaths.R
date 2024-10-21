@@ -10,8 +10,7 @@
 #'     killed, for example, age, gender and road user group.
 #'
 #' @name ozroaddeaths
-#' @docType package
-NULL
+"_PACKAGE"
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 globalVariables(
@@ -34,6 +33,8 @@ globalVariables(
     "hour",
     "minute",
     "month",
+    "n_fatalities",
+    "number_fatalities",
     "road_user",
     "speed_limit",
     "time",

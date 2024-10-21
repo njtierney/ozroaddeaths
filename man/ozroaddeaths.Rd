@@ -2,6 +2,7 @@
 % Please edit documentation in R/package-ozroaddeaths.R
 \docType{package}
 \name{ozroaddeaths}
+\alias{ozroaddeaths-package}
 \alias{ozroaddeaths}
 \title{ozroaddeaths}
 \description{
@@ -13,4 +14,22 @@ ozroaddeaths is a package that pulls data from the Australian Road Deaths
     database fall into two groups: 1) the circumstances of the crash, for
     example, date, location, crash type some details regarding the persons
     killed, for example, age, gender and road user group.
+}
+\author{
+\strong{Maintainer}: Nicholas Tierney \email{nicholas.tierney@gmail.com}
+
+Authors:
+\itemize{
+  \item Maddie Davey \email{madeline.davey@uq.edu.au}
+  \item Justin Carmody \email{carmodyj1@student.unimelb.edu.au}
+  \item Steph de Silva \email{steph@rex-analytics.com}
+  \item Adam Gruer \email{adamgruer@icloud.com}
+}
+
+Other contributors:
+\itemize{
+  \item Mathew Ling \email{m.ling@deakin.edu.au} [contributor]
+  \item Michael Sumner \email{mdsumner@gmail.com} [contributor]
+}
+
 }
