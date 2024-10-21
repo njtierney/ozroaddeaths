@@ -48,6 +48,7 @@ oz_road_fatalities <- function(source = "stable") {
 }
 
 #' Clean the raw fatal data
+#' @noRd
 clean_oz_road_fatalities <- function(dat_fatal_raw) {
 
   na_values_to_replace <- c(-9, "-9")
@@ -82,11 +83,13 @@ clean_oz_road_fatalities <- function(dat_fatal_raw) {
 }
 
 #' Retrieve road fatalities data from BITRE
+#' @noRd
 oz_road_fatalities_bitre <- function() {
   clean_oz_road_fatalities(read_bitre_xlsx_raw(group = "fatalities"))
 }
 
 #' Retrieve road fatalities data from data.gov.au
+#' @noRd
 oz_road_fatalities_data_gov <- function() {
   suppressMessages(suppressWarnings(
     dat_fatal_raw <- readr::read_csv("https://data.gov.au/data/dataset/5b530fb8-526e-4fbf-b0f6-aa24e84e4277/resource/fd646fdc-7788-4bea-a736-e4aeb0dd09a8/download/ardd_fatalities.csv"
