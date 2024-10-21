@@ -43,7 +43,7 @@ oz_road_fatal_crash <- function(){
                   n_fatalities = number_fatalities,
                   bus = bus_involvement,
                   heavy_rigid_truck = heavy_rigid_truck_involvement,
-                  articulated_truck = articulated_truck_involvement) %>%
+                  articulated_truck = articulated_truck_involvement) |>
     dplyr::select(crash_id,
                   n_fatalities,
                   month,
