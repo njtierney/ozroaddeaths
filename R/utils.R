@@ -50,7 +50,9 @@ get_bitre_scrape <- function(group = "fatal_crashes") {
 
   # Check if the XLSX link match our group name.
   idx <- which(grepl(glue::glue("{group}.*xlsx"), all_href))[1]
-  if (is.na(idx)) return("")
+  if (is.na(idx)) {
+    return("")
+    }
 
   # Try to use the link to download the XLSX file.
   link <- glue::glue("https://www.bitre.gov.au{all_href[idx]}")
