@@ -2,4 +2,3 @@
 
 export(oz_road_fatal_crash)
 export(oz_road_fatalities)
-importFrom(magrittr,"%>%")
