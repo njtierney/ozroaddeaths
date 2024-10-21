@@ -8,13 +8,17 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/README-"
 )
 ```
 
 
-# ozroaddeaths [![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/ozroaddeaths.svg?branch=master)](https://travis-ci.org/ropenscilabs/ozroaddeaths) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropenscilabs/ozroaddeaths?branch=master&svg=true)](https://ci.appveyor.com/project/ropenscilabs/ozroaddeaths)
+# ozroaddeaths 
 
+ <!-- badges: start -->
+  [![R-CMD-check](https://github.com/njtierney/ozroaddeaths/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/ozroaddeaths/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/njtierney/ozroaddeaths/graph/badge.svg)](https://app.codecov.io/gh/njtierney/ozroaddeaths)
+  <!-- badges: end -->
 
 ozroaddeaths is a package that pulls data from the Australian Road 
 Deaths Database, run by the Bureau of Infrastructure, Transport and Regional
@@ -32,8 +36,8 @@ database fall into two groups:
 You can install ozroaddeaths from github with:
 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("ropenscilabs/ozroaddeaths")
+# install.packages("pak")
+pak::pak("njtierney/ozroaddeaths")
 ```
 
 
