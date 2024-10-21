@@ -80,5 +80,6 @@ read_bitre_xlsx_raw <- function(group = "fatal_crashes") {
   if (is_empty_path(xlsx_file)) xlsx_file <- get_bitre_hard_coded(group = group)
   if (is_empty_path(xlsx_file)) stop(glue::glue("Can not find a valid URL for {group} data set from BITRE!"))
 
-  readxl::read_xlsx(xlsx_file, sheet = 2, skip = 4)
+  readxl::read_xlsx(xlsx_file, sheet = 2, skip = 4) |>
+    mutate(Time = hms::as_hms(format(Time, "%H:%M:%S")))
 }
