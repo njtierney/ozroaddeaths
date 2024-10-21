@@ -67,3 +67,51 @@ na_values_to_replace<-c(-9, "-9")
   dat_fatal_clean
 
 }
+
+#' Clean the raw fatal data
+clean_oz_road_fatalities <- function(dat_fatal_raw) {
+
+  na_values_to_replace <- c(-9, "-9")
+
+  dat_fatal_clean <- dat_fatal_raw |>
+    janitor::clean_names() |>
+    dplyr::rename(bus = bus_involvement,
+                  weekday = dayweek,
+                  heavy_rigid_truck = heavy_rigid_truck_involvement,
+                  articulated_truck = articulated_truck_involvement) |>
+    dplyr::select(crash_id,
+                  month,
+                  year,
+                  weekday,
+                  time,
+                  state,
+                  crash_type,
+                  bus,
+                  heavy_rigid_truck,
+                  articulated_truck,
+                  speed_limit,
+                  road_user,
+                  gender,
+                  age) |>
+    purrr::map_dfr(~ ifelse(.x %in% na_values_to_replace, NA, .x)) |>
+    dplyr::mutate(date = lubridate::make_date(year, month, 1),
+                  time = hms::as_hms(time),
+                  date_time = lubridate::as_datetime(paste(date,time)))
+
+
+  dat_fatal_clean
+}
+
+#' Retrieve road fatalities data from BITRE
+oz_road_fatalities_bitre <- function() {
+  clean_oz_road_fatalities(read_bitre_xlsx_raw(group = "fatalities"))
+}
+
+#' Retrieve road fatalities data from data.gov.au
+oz_road_fatalities_data_gov <- function() {
+  suppressMessages(suppressWarnings(
+    dat_fatal_raw <- readr::read_csv("https://data.gov.au/data/dataset/5b530fb8-526e-4fbf-b0f6-aa24e84e4277/resource/fd646fdc-7788-4bea-a736-e4aeb0dd09a8/download/ardd_fatalities.csv"
+    )
+  ))
+  clean_oz_road_fatalities(dat_fatal_raw)
+}
