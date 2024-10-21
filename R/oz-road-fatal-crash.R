@@ -4,6 +4,7 @@
 #'     specifically, the circumstances of the crash, for example, date,
 #'     location, crash type.
 #'
+#' @param source Character. Either "stable" or "latest".
 #' @return a dataset (tibble) of fatal crash data
 #'
 #' Format: a data frame with 43,345 observations on the following 14
@@ -29,39 +30,16 @@
 #' oz_road_fatal_crash
 #' }
 #' @export
-oz_road_fatal_crash <- function(){
+oz_road_fatal_crash <- function(source = "stable") {
+  stopifnot(source %in% c("stable", "latest"))
 
-  suppressMessages(suppressWarnings(
-    dat_fatal_crash_raw <- readr::read_csv("https://data.gov.au/data/dataset/5b530fb8-526e-4fbf-b0f6-aa24e84e4277/resource/d54f7465-74b8-4fff-8653-37e724d0ebbb/download/ardd_fatal_crashes.csv")
-  ))
+  if (source == "stable") {
+    return(oz_road_fatal_crash_data_gov())
+  }
 
-  na_values_to_replace <- c(-9, "-9")
-
-  dat_fatal_crash_clean <- dat_fatal_crash_raw |>
-    janitor::clean_names() |>
-    dplyr::rename(weekday = dayweek,
-                  n_fatalities = number_fatalities,
-                  bus = bus_involvement,
-                  heavy_rigid_truck = heavy_rigid_truck_involvement,
-                  articulated_truck = articulated_truck_involvement) |>
-    dplyr::select(crash_id,
-                  n_fatalities,
-                  month,
-                  year,
-                  weekday,
-                  time,
-                  state,
-                  crash_type,
-                  bus,
-                  heavy_rigid_truck,
-                  articulated_truck,
-                  speed_limit) |>
-    purrr::map_dfr(~ ifelse(.x %in% na_values_to_replace, NA, .x)) |>
-    dplyr::mutate(date = lubridate::make_date(year, month, 1),
-                  time = hms::as_hms(time),
-                  date_time = lubridate::as_datetime(paste(date,time)))
-
-  dat_fatal_crash_clean
+  if (source == "latest") {
+    return(oz_road_fatal_crash_bitre())
+  }
 }
 
 #' Clean the raw fatal crash data
