@@ -18,13 +18,12 @@ Description: ozroaddeaths is a package that pulls data from the Australian Road
     database fall into two groups: 1) the circumstances of the crash, for
     example, date, location, crash type some details regarding the persons
     killed, for example, age, gender and road user group.
-Depends: R (>= 3.6)
+Depends: R (>= 4.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
 Imports: 
-    magrittr,
     janitor,
     dplyr,
     readr,
