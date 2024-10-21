@@ -4,7 +4,10 @@
 \alias{oz_road_fatalities}
 \title{Retrieve Australian Fatal Crash Data}
 \usage{
-oz_road_fatalities()
+oz_road_fatalities(source = "stable")
+}
+\arguments{
+\item{source}{Character. Either "stable" or "latest".}
 }
 \value{
 a dataset (tibble) of fatal crash data
@@ -12,13 +15,13 @@ a dataset (tibble) of fatal crash data
 \describe{
   \item{`crash_id`}{An integer, 13 digits, unique to each crash}
   \item{`state`}{Text, Austraian jurisdiction, Abbreviation for each state and territory. QLD = Queensland, NSW = New South Wales, ACT = Australian Capital Territory, VIC = Victoria, TAS = TASMANIA, SA = South Australia, WA = Western Australian, NT = Northern Territory}
-  \item{`Date`}{Date, Year, Month and Day. This is the date of the crash, but with unknown day so set to the 1st}
-  \item{`Months`}{Integer, the month of the date of the crash}
+  \item{`date`}{Date, Year, Month and Day. This is the date of the crash, but with unknown day so set to the 1st}
+  \item{`month`}{Integer, the month of the date of the crash}
   \item{`year`}{Integer, the year of the date of the crash}
   \item{`weekday`}{Text the weekday of the date of the crash}
   \item{`time`}{Time, the time of the date of the crash}
   \item{`crash_type`}{Character, Code summarising the type of type of crash. Single, Multiple, or Pedestrian}
-  \item{`n_fatalities`}{Integer, number of killed persons in the crash}
+  \item{`date_time`}{POSIXct, the date time of the crash}
   \item{`bus`}{logical - whether a bus was involved in the crash (TRUE) or not (FALSE)}
   \item{`heavy_rigid_truck`}{logical - whether a heavy rigid truck was involved in the crash (TRUE) or not (FALSE)}
   \item{`articualated_truck`}{logical - whether a articulated trucl was involved in the crash (TRUE) or not (FALSE)}
@@ -31,6 +34,11 @@ a dataset (tibble) of fatal crash data
 This function pulls data from the Australian Road Deaths Database.
     Specifically, the details regarding the persons killed, for
     example, age, gender and road user group.
+}
+\details{
+There are two sources of data: data.gov.au and bitre.gov.au.
+While bitre.gov.au is more up-to-date, there are inconsistencies
+between the two sources for certain crash records.
 }
 \examples{
 \dontrun{
