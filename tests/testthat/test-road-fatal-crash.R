@@ -8,3 +8,6 @@ test_that("test names of fatal crash are the same", {
   expect_snapshot(names(dat_road_fatal_crash))
 })
 
+test_that("classes are consistent", {
+  expect_snapshot(classes(dat_road_fatal_crash))
+})
