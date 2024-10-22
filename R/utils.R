@@ -1,3 +1,7 @@
+
+classes <- function(x){
+  purrr::map(x, class)
+}
 #' Get BITRE data with hard coded link
 #' @param group Character. The group name.
 #' @return path to the temporary XLSX file.
@@ -93,4 +97,3 @@ read_bitre_xlsx_raw <- function(group = "fatal_crashes") {
 
   readxl::read_xlsx(xlsx_file, sheet = 2, skip = 4) |>
     dplyr::mutate(Time = hms::as_hms(format(Time, "%H:%M:%S")))
-}
