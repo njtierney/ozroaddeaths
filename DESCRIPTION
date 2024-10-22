@@ -32,7 +32,10 @@ Imports:
     hms,
     readxl,
     rvest,
-    glue
+    glue,
+    utils,
+    rlang,
+    cli
 Suggests: knitr,
     rmarkdown,
     testthat (>= 3.0.0),

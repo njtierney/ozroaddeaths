@@ -2,7 +2,7 @@
 #' @param group Character. The group name.
 #' @return path to the temporary XLSX file.
 get_bitre_hard_coded <- function(group = "fatal_crashes") {
-  stopifnot(group %in% c("fatal_crashes", "fatalities"))
+  rlang::arg_match(group, c("fatal_crashes", "fatalities"))
 
   # Date format: "sep2024"
   # If current date is 2024-10, this will produce
@@ -21,7 +21,7 @@ get_bitre_hard_coded <- function(group = "fatal_crashes") {
   temp_xlsx <- tempfile()
   target_link <- NA
   for (link in links) {
-    error <- try(suppressWarnings(download.file(link, quiet = TRUE, destfile = temp_xlsx)),
+    error <- try(suppressWarnings(utils::download.file(link, quiet = TRUE, destfile = temp_xlsx)),
                  silent = TRUE)
     if (!inherits(error, "try-error")) {
       target_link <- link
@@ -40,8 +40,9 @@ get_bitre_hard_coded <- function(group = "fatal_crashes") {
 #' Get BITRE data by scraping the website
 #' @param group Character. The group name.
 #' @return path to the temporary XLSX file.
+#' @noRd
 get_bitre_scrape <- function(group = "fatal_crashes") {
-  stopifnot(group %in% c("fatal_crashes", "fatalities"))
+  rlang::arg_match(group, c("fatal_crashes", "fatalities"))
 
   # Get all links: two XLSX links, one PDF link.
   all_href <- rvest::read_html("https://www.bitre.gov.au/statistics/safety/fatal_road_crash_database") |>
@@ -52,12 +53,12 @@ get_bitre_scrape <- function(group = "fatal_crashes") {
   idx <- which(grepl(glue::glue("{group}.*xlsx"), all_href))[1]
   if (is.na(idx)) {
     return("")
-    }
+  }
 
   # Try to use the link to download the XLSX file.
   link <- glue::glue("https://www.bitre.gov.au{all_href[idx]}")
   temp_xlsx <- tempfile()
-  error <- try(suppressWarnings(download.file(link, quiet = TRUE, destfile = temp_xlsx)),
+  error <- try(suppressWarnings(utils::download.file(link, quiet = TRUE, destfile = temp_xlsx)),
                silent = TRUE)
 
   # Return an empty string when fail.
@@ -75,13 +76,21 @@ is_empty_path <- function(x) {
 #' Get BITRE data
 #' @param group Character. The group name.
 #' @return a tibble.
+#' @noRd
 read_bitre_xlsx_raw <- function(group = "fatal_crashes") {
-  stopifnot(group %in% c("fatal_crashes", "fatalities"))
+  rlang::arg_match(group, c("fatal_crashes", "fatalities"))
+  Time <- NULL
 
   xlsx_file <- get_bitre_scrape(group = group)
-  if (is_empty_path(xlsx_file)) xlsx_file <- get_bitre_hard_coded(group = group)
-  if (is_empty_path(xlsx_file)) stop(glue::glue("Can not find a valid URL for {group} data set from BITRE!"))
+  if (is_empty_path(xlsx_file)) {
+    xlsx_file <- get_bitre_hard_coded(group = group)
+  }
+  if (is_empty_path(xlsx_file)){
+    cli::cli_abort(
+      message = "Can not find a valid URL for {group} data set from BITRE!"
+    )
+  }
 
   readxl::read_xlsx(xlsx_file, sheet = 2, skip = 4) |>
-    mutate(Time = hms::as_hms(format(Time, "%H:%M:%S")))
+    dplyr::mutate(Time = hms::as_hms(format(Time, "%H:%M:%S")))
 }
