@@ -31,6 +31,12 @@ You can install ozroaddeaths from github with:
 pak::pak("njtierney/ozroaddeaths")
 ```
 
+Or from the [R Universe](https://r-universe.dev/) with:
+
+``` r
+install.packages("ozroaddeaths", repos = c("https://njtierney.r-universe.dev", "https://cloud.r-project.org"))
+```
+
 This data is taken from the Australian Road Deaths Database, which
 provides basic details of road transport crash fatalities in Australia
 as reported by the police each month to the State and Territory road

@@ -29,9 +29,14 @@ Imports:
     readr,
     lubridate,
     purrr,
-    hms
-Suggests: 
-    knitr,
+    hms,
+    readxl,
+    rvest,
+    glue,
+    utils,
+    rlang,
+    cli
+Suggests: knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     ggplot2,

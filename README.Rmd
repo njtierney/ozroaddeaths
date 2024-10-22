@@ -43,6 +43,15 @@ You can install ozroaddeaths from github with:
 pak::pak("njtierney/ozroaddeaths")
 ```
 
+Or from the [R Universe](https://r-universe.dev/) with:
+
+```{r}
+#| label: r-universe
+#| eval: false
+install.packages("ozroaddeaths", repos = c("https://njtierney.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+
 
 ```{r}
 #| label: setup
