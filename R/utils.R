@@ -1,7 +1,7 @@
 
 classes <- function(x){
   purrr::map(x, class)
-
+}
 #' Get BITRE data with hard coded link
 #' @param group Character. The group name.
 #' @return path to the temporary XLSX file.
