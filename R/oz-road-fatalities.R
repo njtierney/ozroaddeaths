@@ -36,15 +36,15 @@
 #' oz_road_fatalities
 #' }
 oz_road_fatalities <- function(source = "stable") {
-  stopifnot(source %in% c("stable", "latest"))
+  rlang::arg_match(source, c("stable", "latest"))
 
-  if (source == "stable") {
-    return(oz_road_fatalities_data_gov())
-  }
+  data <- switch(
+    source,
+    stable = oz_road_fatalities_data_gov(),
+    latest = oz_road_fatalities_bitre()
+  )
 
-  if (source == "latest") {
-    return(oz_road_fatalities_bitre())
-  }
+  data
 }
 
 #' Clean the raw fatal data

@@ -35,15 +35,15 @@
 #' }
 #' @export
 oz_road_fatal_crash <- function(source = "stable") {
-  stopifnot(source %in% c("stable", "latest"))
+  rlang::arg_match(source, c("stable", "latest"))
 
-  if (source == "stable") {
-    return(oz_road_fatal_crash_data_gov())
-  }
+  data <- switch(
+    source,
+    stable = oz_road_fatal_crash_data_gov(),
+    latest = oz_road_fatal_crash_bitre()
+  )
 
-  if (source == "latest") {
-    return(oz_road_fatal_crash_bitre())
-  }
+  data
 }
 
 #' Clean the raw fatal crash data

@@ -2,8 +2,8 @@
 % Please edit documentation in R/package-ozroaddeaths.R
 \docType{package}
 \name{ozroaddeaths}
-\alias{ozroaddeaths}
 \alias{ozroaddeaths-package}
+\alias{ozroaddeaths}
 \title{ozroaddeaths}
 \description{
 ozroaddeaths is a package that pulls data from the Australian Road Deaths
